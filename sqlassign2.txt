@@ -1,0 +1,78 @@
+---------------- 2nd assign --------------------
+
+--1. Retrieve a list of MANAGERS.
+Select ename,job
+FROM EMP
+WHERE job='MANAGER'
+
+--2. Find out salary of both MILLER and SMITH. 
+select ename,sal
+from EMP
+where ename IN('MILLER','SMITH')
+
+--3. Find out the names and salaries of all employees earning more than 1000 per month.
+select ename,sal
+from EMP
+WHERE SAL > 1000
+
+--4. Display the names and salaries of all employees except JAMES.
+select ename,sal
+from EMP
+where   ename <> 'JAMES'
+
+--5. Find out the details of employees whose names begin with ‘S’
+select *
+from EMP
+where ename LIKE 'A%'
+
+--6. Find out the names of all employees that have ‘A’ anywhere in their name. 
+select ename
+from EMP
+where ename like '%a%'
+
+--7. Find out the names of all employees that have ‘L’ as their third character in their name.
+select ename from EMP where ename like '__L%'
+
+--8. Find out the names of the employees whose name begin with ‘A’ or ‘M’.
+select ename
+from EMP
+where ename LIKE 'A%' OR ename LIKE 'M%'
+
+--9. Compute yearly salary of SMITH. 
+select ename,sal*12 as "YEAR SAL"
+from EMP
+where ename='SMITH'
+
+--10. Compute daily salary of JONES. 
+SELECT ename, sal/30 as "dailysalary"
+from EMP
+WHERE ename = 'JONES'
+
+--11. Calculate the total monthly salary of all employees. 
+select ename, sum(sal) as "total_salary"
+from EMP
+group by ename,job
+
+--12. Print the average annual salary. 
+select ename, avg(sal*12) as "average salary"
+from EMP
+group by ename,job
+
+--13. Select the name, job, salary, department number of all employees except 
+select ename,job ,sal,DEPTNO
+from EMP
+group by  ename,job ,sal,DEPTNO
+
+
+--14. SALESMAN from department number 30. 
+select ename,job,deptno
+from EMP
+where job = 'SALESMAN' AND deptno = 30
+
+--15. List unique departments of the EMP table.
+SELECT DISTINCT(deptname) 
+FROM EMP INNER JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO;
+
+ --16.List the name and salary of employees who earn more than 1500 and are in department 10 or 30. Label the columns Employee and Monthly Salary respectively.
+  select ename as'employee name', sal as'Mounthly salary' from emp 
+ where sal>1500 and deptno in(10,30)
